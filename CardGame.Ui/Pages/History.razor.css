@@ -1,0 +1,13 @@
+﻿.title {
+    background-color: white;
+    text-align: left;
+}
+
+.row {
+    align-content:center;
+}
+
+    .row img {
+        display: block;
+        margin-left: auto;
+    }

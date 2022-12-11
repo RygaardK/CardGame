@@ -1,0 +1,23 @@
+﻿<div class="col-sm-@column">
+    <div class="card">
+        <div class="card-body">
+            <div class="box-left">
+                <h1>@CardInDeck.NamedValue</h1>
+            </div>
+            <div class="box-center">
+                <h4>@CardInDeck.Suite</h4>
+            </div>
+            <div class="box-right">
+                <h1>@CardInDeck.NamedValue</h1>
+            </div>
+        </div>
+    </div>
+    <input type="checkbox" id="@CardInDeck.Rank"  @bind="@CardInDeck.IsChecked" />
+</div>
+
+@code {
+    [Parameter]
+    public CardDto? CardInDeck { get; set; }
+    [Parameter]
+    public int column { get; set; }
+}

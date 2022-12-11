@@ -1,0 +1,58 @@
+﻿@inject IRequestService _service
+@inject NavigationManager _nav
+@page "/history"
+
+@if (cardHistory is null)
+{
+    <p>Loading</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Card One</th>
+                <th scope="col">Card Two</th>
+                <th scope="col">Card Three</th>
+                <th scope="col">Card Four</th>
+                <th scope="col">Card Five</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cardHistory)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CardOne</td>
+                    <td>@item.CardTwo</td>
+                    <td>@item.CardThree</td>
+                    <td>@item.CardFour</td>
+                    <td>@item.CardFive</td>
+                    <button type="button" class="btn btn-danger" @onclick="(()=> RemoveCard(item.Id))">Delete</button>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
+@code {
+    IEnumerable<CardHistoryDto>? cardHistory; 
+    // TODO: public bool DeleteDialogOpen { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cardHistory = await _service.GetAllCardHistorysAsync();
+        cardHistory.Reverse();
+    }
+    private void RemoveCard(int id)
+    {
+        _service.RemoveCard(id);
+        _nav.NavigateTo(_nav.Uri, forceLoad: true);
+    }
+
+
+}

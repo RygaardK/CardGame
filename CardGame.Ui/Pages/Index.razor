@@ -1,0 +1,42 @@
+﻿@page "/"
+@inject IRequestService _request
+<link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
+<link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css">
+
+@if (CardDeck is null)
+{
+    <p> loading..</p>
+}
+else
+{
+    @if (!GameStarted)
+    {
+        <div class="wrap" style="width:100%">
+            <div>
+                <div class="wrap" style="width: 100%" align="center">
+
+                    <button class="button" @onclick="(() => StartGame())">Start a Game!</button>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var card in CardsInHand)
+            {
+                <CardComponent CardInDeck="card" column="2" />
+            }
+        </div>
+        <RadzenButton Click=@(args => OnClick()) Text="Replace Cards" Icon="refresh" ButtonStyle="ButtonStyle.Success" />
+    }
+}
+
+
+
+
+
+
+
+
+
